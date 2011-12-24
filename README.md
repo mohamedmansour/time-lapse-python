@@ -19,3 +19,19 @@ the video for you within the desired frames per second
 **Example (skip to encoding):**
 
     python time-lapse.py --base 86400 --to 60  --encode 
+
+
+**Help**
+
+    python time-lapse.py -h
+    usage: time-lapse.py [-h] --base BASE --to TO [--mencoder MENCODER] [--encode]
+    
+    Process some integers.
+    
+    optional arguments:
+      -h, --help           show this help message and exit
+      --base BASE          The total number of seconds to time lapse.
+      --to TO              The total number of seconds the resulting video is.
+      --mencoder MENCODER  The mencoder executable location.
+      --encode             Skip screen grabbing and directly encode the images.
+

@@ -107,7 +107,7 @@ class TimeLapse:
     parser.add_argument('--mencoder', dest='mencoder', type=file,
         help='The mencoder executable location.')
     parser.add_argument('--encode', action='store_true',
-        help='The mplayer executable location.')
+        help='Skip screen grabbing and directly encode the images.')
     return parser.parse_args()
 
   def start(self):
