@@ -8,6 +8,17 @@ You specify the total time of the Time-Lapse and the resulting
 time for the result. It will automatically start and create
 the video for you within the desired frames per second
 
+Prerequisistes
+--------------
+
+This script depends on the following software to be installed.
+
+ * Python 2.7
+ * PIL Extensions
+ * MEncoder
+
+Examples
+--------
 **Example (on Windows):**
 
     python time-lapse.py --base 86400 --to 60 --mencoder C:/Sandbox/Software/MPlayer-athlon-svn-34401/mencoder.exe
