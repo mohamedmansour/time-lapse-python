@@ -29,8 +29,11 @@ Examples
 
 **Example (skip to encoding):**
 
-    python time-lapse.py --base 86400 --to 60  --encode 
+    python time-lapse.py --base 86400 --to 60  --skip-captures
 
+**Example (skip encoding just capture):**
+
+    python time-lapse.py --base 86400 --to 60  --skip-encode
 
 **Help**
 

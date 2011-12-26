@@ -42,7 +42,16 @@ class ScreenGrabber(threading.Thread):
 
   def run(self, total_frames, callback):
     ''' Runs the screen grabbing tool until the intervals completed '''
-    print '  Start screen grabbing ...'
+    sys.stdout.write('  Start screen grabbing in ... ')
+    self.event.wait(1)
+    sys.stdout.write(' 3')
+    self.event.wait(1)
+    sys.stdout.write(', 2')
+    self.event.wait(1)
+    sys.stdout.write(', 1')
+    self.event.wait(1)
+    sys.stdout.write('. Capturing!\n')
+
     seconds_per_interval = total_frames / 24
     print '    Total frames to record: %d, each frame every %d seconds' \
         % (total_frames, seconds_per_interval)
@@ -106,20 +115,22 @@ class TimeLapse:
         help='The total number of seconds the resulting video is.')
     parser.add_argument('--mencoder', dest='mencoder', type=file,
         help='The mencoder executable location.')
-    parser.add_argument('--encode', action='store_true',
-        help='Skip screen grabbing and directly encode the images.')
+    parser.add_argument('--skip-capture', action='store_true',
+        help='Skip screen captures.')
+    parser.add_argument('--skip-encode', action='store_true',
+        help='Skip image encoding.')
     return parser.parse_args()
 
   def start(self):
     ''' Calculates the number of frames to capture within the time lapse '''
-    if not self.args.encode and self.args.base < self.args.to:
+    if not self.args.skip-capture and self.args.base < self.args.to:
       print 'Error: Your base must be greater than the to, since we are ' \
             'doing a time lapse.'
       sys.exit(1)
 
     print 'Start time-lapse ...'
     
-    if self.args.encode:
+    if self.args.skip-capture:
       self.on_screen_grabber_done()
     else:
       total_frames = self.args.base * 24
@@ -129,8 +140,9 @@ class TimeLapse:
 
   def on_screen_grabber_done(self):
     ''' Callback when screen grab thread has completed, then the encoding will run '''
-    self.image_encoder.run()
-    print 'Done time-lapse!'
+   if not self.args.skip-encode:
+     self.image_encoder.run()
+   print 'Done time-lapse!'
 
 
 if __name__ == "__main__":
