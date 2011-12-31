@@ -115,22 +115,22 @@ class TimeLapse:
         help='The total number of seconds the resulting video is.')
     parser.add_argument('--mencoder', dest='mencoder', type=file,
         help='The mencoder executable location.')
-    parser.add_argument('--skip-capture', action='store_true',
+    parser.add_argument('--skip_capture', action='store_true',
         help='Skip screen captures.')
-    parser.add_argument('--skip-encode', action='store_true',
+    parser.add_argument('--skip_encode', action='store_true',
         help='Skip image encoding.')
     return parser.parse_args()
 
   def start(self):
     ''' Calculates the number of frames to capture within the time lapse '''
-    if not self.args.skip-capture and self.args.base < self.args.to:
+    if not self.args.skip_capture and self.args.base < self.args.to:
       print 'Error: Your base must be greater than the to, since we are ' \
             'doing a time lapse.'
       sys.exit(1)
 
     print 'Start time-lapse ...'
     
-    if self.args.skip-capture:
+    if self.args.skip_capture:
       self.on_screen_grabber_done()
     else:
       total_frames = self.args.base * 24
@@ -140,9 +140,9 @@ class TimeLapse:
 
   def on_screen_grabber_done(self):
     ''' Callback when screen grab thread has completed, then the encoding will run '''
-   if not self.args.skip-encode:
-     self.image_encoder.run()
-   print 'Done time-lapse!'
+    if not self.args.skip_encode:
+      self.image_encoder.run()
+    print 'Done time-lapse!'
 
 
 if __name__ == "__main__":
